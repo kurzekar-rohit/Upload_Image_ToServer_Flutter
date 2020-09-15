@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
 
 void main() {
   runApp(UploadImageDemo());
@@ -26,13 +28,28 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   String base64Image;
   File tmpFile;
   String errMessage = 'Error Uploading Image';
-  String UPLOADIMAGE;
+  String fileSize = 'File size is greater than 2MB';
+  var length;
+  List<File> files;
   chooseImage() {
-    setState(() {
-      file = ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() async {
+      // file = ImagePicker.pickImage(source: ImageSource.gallery);
+      FilePickerResult result =
+          await FilePicker.platform.pickFiles(allowMultiple: true);
+      if (result != null) {
+        files = result.paths.map((path) => File(path));
+        uploadImage(result.paths);
+      }
     });
     setStatus('');
   }
+
+  // clickImage() {
+  //   setState(() {
+  //     file = ImagePicker.pickImage(source: ImageSource.camera);
+  //   });
+  //   setStatus('');
+  // }
 
   setStatus(String message) {
     setState(() {
@@ -40,28 +57,46 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     });
   }
 
-  startUpload() {
-    setStatus('Uploading Image...');
-    if (null == tmpFile) {
-      setStatus(errMessage);
-      return;
-    }
-    String fileName = tmpFile.path.split('/').last;
-    upload(fileName);
-  }
+  // startUpload() {
+  //   setStatus('Uploading Image...');
+  //   print("File Size lengthSync: ${tmpFile.lengthSync()}");
+  //   length = tmpFile.lengthSync();
+  //   length = length / 1024;
+  //   print('File Size in KB : $length');
 
-  upload(String fileName) {
-    http.post(uploadEndPoint, body: {
-      "image": base64Image,
-      "name": fileName,
-      // "action": "UPLOADIMAGE",
-    }).then((result) {
-      print("ImageBase64: $base64Image");
-      print("FileName: $fileName");
-      setStatus(result.statusCode == 200 ? result.body : errMessage);
-    }).catchError((error) {
-      setStatus(error);
-    });
+  //   if (null == tmpFile) {
+  //     setStatus(errMessage);
+  //     return;
+  //   }
+  //   if (length > 2000) {
+  //     setStatus(fileSize);
+  //     return;
+  //   }
+  // String fileName = tmpFile.path.split('/').last;
+  //   upload(fileName);
+  //   // uploadFile();
+  // }
+
+  // upload(String fileName) {
+  //   http.post(uploadEndPoint, body: {
+  //     "image": base64Image,
+  //     "name": fileName,
+  //     // "action": "UPLOADIMAGE",
+  //   }).then((result) {
+  //     print("ImageBase64: $base64Image");
+  //     print("FileName: $fileName");
+  //     setStatus(result.statusCode == 200 ? result.body : errMessage);
+  //   }).catchError((error) {
+  //     setStatus(error);
+  //   });
+  // }
+
+  Future<String> uploadImage(filename) async {
+    var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
+    request.files.add(await http.MultipartFile.fromPath('picture', filename));
+    print('This Is Filename: $filename');
+    var res = await request.send();
+    return res.reasonPhrase;
   }
 
   Widget showImage() {
@@ -110,19 +145,26 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                 child: Text('Choose Image'),
               ),
               SizedBox(
-                height: 20.0,
+                height: 8.0,
               ),
-              showImage(),
+              // OutlineButton(
+              //   onPressed: clickImage,
+              //   child: Text('Click Image'),
+              // ),
               SizedBox(
                 height: 20.0,
               ),
-              OutlineButton(
-                onPressed: startUpload,
-                child: Text('Upload Image'),
-              ),
+              // showImage(),
               SizedBox(
                 height: 20.0,
               ),
+              // OutlineButton(
+              //   onPressed: startUpload,
+              //   child: Text('Upload Image'),
+              // ),
+              // SizedBox(
+              //   height: 20.0,
+              // ),
               Text(
                 status,
                 textAlign: TextAlign.center,
