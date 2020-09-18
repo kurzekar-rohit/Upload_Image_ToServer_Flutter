@@ -28,19 +28,183 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   String base64Image;
   File tmpFile;
   String errMessage = 'Error Uploading Image';
-  String fileSize = 'File size is greater than 2MB';
+  String fileSize = 'File size is greater than 5MB';
   var length;
   List<File> files;
-  chooseImage() {
-    setState(() async {
-      // file = ImagePicker.pickImage(source: ImageSource.gallery);
-      FilePickerResult result =
-          await FilePicker.platform.pickFiles(allowMultiple: true);
-      if (result != null) {
-        files = result.paths.map((path) => File(path));
-        uploadImage(result.paths);
+  var filename1,
+      file_size1,
+      filename2,
+      file_size2,
+      filename3,
+      file_size3,
+      filename4,
+      file_size4,
+      filename5,
+      file_size5;
+
+  chooseImage_1() async {
+    // setState(() async {
+    // file = ImagePicker.pickImage(source: ImageSource.gallery);
+    FilePickerResult result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      // files = result.paths.map((path) => File(path));
+      // print('Result path : $files');
+      // uploadImage(result.paths);
+      PlatformFile file = result.files.first;
+      print('FileName : ${file.name}');
+      print('FileSize : ${file.size}');
+      print('FileExtension : ${file.extension}');
+      print('FilePath : ${file.path}');
+      if (file.size > 5120) {
+        print('FIle size is more');
+        setState(() {
+          filename1 = fileSize;
+          // file_size1 = '';
+        });
+      } else {
+        setState(() {
+          filename1 = file.name;
+          file_size1 = file.size;
+        });
       }
-    });
+    }
+    // });
+    setStatus('');
+  }
+
+  chooseImage_2() async {
+    // setState(() async {
+    // file = ImagePicker.pickImage(source: ImageSource.gallery);
+    FilePickerResult result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      // files = result.paths.map((path) => File(path));
+      // print('Result path : $files');
+      // uploadImage(result.paths);
+      PlatformFile file = result.files.first;
+      print('FileName : ${file.name}');
+      print('FileSize : ${file.size}');
+      print('FileExtension : ${file.extension}');
+      print('FilePath : ${file.path}');
+      // setState(() {
+      //   filename2 = file.name;
+      //   file_size2 = file.size;
+      // });
+      if (file.size > 5120) {
+        print('FIle size is more');
+        setState(() {
+          filename2 = fileSize;
+          // file_size1 = '';
+        });
+      } else {
+        setState(() {
+          filename2 = file.name;
+          file_size2 = file.size;
+        });
+      }
+    }
+    // });
+    setStatus('');
+  }
+
+  chooseImage_3() async {
+    // setState(() async {
+    // file = ImagePicker.pickImage(source: ImageSource.gallery);
+    FilePickerResult result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      // files = result.paths.map((path) => File(path));
+      // print('Result path : $files');
+      // uploadImage(result.paths);
+      PlatformFile file = result.files.first;
+      print('FileName : ${file.name}');
+      print('FileSize : ${file.size}');
+      print('FileExtension : ${file.extension}');
+      print('FilePath : ${file.path}');
+      // setState(() {
+      //   filename3 = file.name;
+      //   file_size3 = file.size;
+      // });
+      if (file.size > 5120) {
+        print('FIle size is more');
+        setState(() {
+          filename3 = fileSize;
+          // file_size1 = '';
+        });
+      } else {
+        setState(() {
+          filename3 = file.name;
+          file_size3 = file.size;
+        });
+      }
+    }
+    // });
+    setStatus('');
+  }
+
+  chooseImage_4() async {
+    // setState(() async {
+    // file = ImagePicker.pickImage(source: ImageSource.gallery);
+    FilePickerResult result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      // files = result.paths.map((path) => File(path));
+      // print('Result path : $files');
+      // uploadImage(result.paths);
+      PlatformFile file = result.files.first;
+      print('FileName : ${file.name}');
+      print('FileSize : ${file.size}');
+      print('FileExtension : ${file.extension}');
+      print('FilePath : ${file.path}');
+      // setState(() {
+      //   filename4 = file.name;
+      //   file_size4 = file.size;
+      // });
+      if (file.size > 5120) {
+        print('FIle size is more');
+        setState(() {
+          filename4 = fileSize;
+          // file_size1 = '';
+        });
+      } else {
+        setState(() {
+          filename4 = file.name;
+          file_size4 = file.size;
+        });
+      }
+    }
+    // });
+    setStatus('');
+  }
+
+  chooseImage_5() async {
+    // setState(() async {
+    // file = ImagePicker.pickImage(source: ImageSource.gallery);
+    FilePickerResult result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      // files = result.paths.map((path) => File(path));
+      // print('Result path : $files');
+      // uploadImage(result.paths);
+      PlatformFile file = result.files.first;
+      print('FileName : ${file.name}');
+      print('FileSize : ${file.size}');
+      print('FileExtension : ${file.extension}');
+      print('FilePath : ${file.path}');
+      // setState(() {
+      //   filename5 = file.name;
+      //   file_size5 = file.size;
+      // });
+      if (file.size > 5120) {
+        print('FIle size is more');
+        setState(() {
+          filename5 = fileSize;
+          // file_size1 = '';
+        });
+      } else {
+        setState(() {
+          filename5 = file.name;
+          file_size5 = file.size;
+        });
+      }
+    }
+    // });
     setStatus('');
   }
 
@@ -140,31 +304,129 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              OutlineButton(
-                onPressed: chooseImage,
-                child: Text('Choose Image'),
+              Expanded(
+                child: OutlineButton(
+                  onPressed: chooseImage_1,
+                  child: Text('Choose File 1'),
+                ),
               ),
-              SizedBox(
-                height: 8.0,
+              // SizedBox(
+              //   height: 8.0,
+              // ),
+              Expanded(
+                child: filename1 != null
+                    ? Text('$filename1')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
               ),
               // OutlineButton(
               //   onPressed: clickImage,
               //   child: Text('Click Image'),
               // ),
-              SizedBox(
-                height: 20.0,
+              // SizedBox(
+              //   height: 5.0,
+              // ),
+              Expanded(
+                child: file_size1 != null
+                    ? Text('$file_size1 kB')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
               ),
               // showImage(),
               SizedBox(
-                height: 20.0,
+                height: 5.0,
               ),
-              // OutlineButton(
-              //   onPressed: startUpload,
-              //   child: Text('Upload Image'),
-              // ),
-              // SizedBox(
-              //   height: 20.0,
-              // ),
+              Expanded(
+                child: OutlineButton(
+                  onPressed: chooseImage_2,
+                  child: Text('Choose File 2'),
+                ),
+              ),
+              Expanded(
+                child: filename2 != null
+                    ? Text('$filename2')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              Expanded(
+                child: file_size2 != null
+                    ? Text('$file_size2 kB')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Expanded(
+                child: OutlineButton(
+                  onPressed: chooseImage_3,
+                  child: Text('Choose File 3'),
+                ),
+              ),
+              Expanded(
+                child: filename3 != null
+                    ? Text('$filename3')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              Expanded(
+                child: file_size3 != null
+                    ? Text('$file_size3 kB')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Expanded(
+                child: OutlineButton(
+                  onPressed: chooseImage_4,
+                  child: Text('Choose File 4'),
+                ),
+              ),
+              Expanded(
+                child: filename4 != null
+                    ? Text('$filename4')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              Expanded(
+                child: file_size4 != null
+                    ? Text('$file_size4 kB')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Expanded(
+                child: OutlineButton(
+                  onPressed: chooseImage_5,
+                  child: Text('Choose File 5'),
+                ),
+              ),
+              Expanded(
+                child: filename5 != null
+                    ? Text('$filename5')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
+              Expanded(
+                child: file_size5 != null
+                    ? Text('$file_size5 kB')
+                    : SizedBox(
+                        height: 5.0,
+                      ),
+              ),
               Text(
                 status,
                 textAlign: TextAlign.center,
