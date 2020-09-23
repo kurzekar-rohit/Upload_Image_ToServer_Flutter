@@ -28,9 +28,16 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   String base64Image;
   File tmpFile;
   String errMessage = 'Error Uploading Image';
-  String fileSize = 'File size is greater than 5MB';
-  var length;
+  String fileSizeError = 'File size is greater than 5MB';
+  // var length;
+  String fileName;
   List<File> files;
+  bool _progressBarActive1,
+      _progressBarActive2,
+      _progressBarActive3,
+      _progressBarActive4,
+      _progressBarActive5 = false;
+
   var filename1,
       file_size1,
       filename2,
@@ -47,9 +54,6 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      // files = result.paths.map((path) => File(path));
-      // print('Result path : $files');
-      // uploadImage(result.paths);
       PlatformFile file = result.files.first;
       print('FileName : ${file.name}');
       print('FileSize : ${file.size}');
@@ -58,13 +62,13 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
-          filename1 = fileSize;
-          // file_size1 = '';
+          filename1 = fileSizeError;
         });
       } else {
         setState(() {
           filename1 = file.name;
           file_size1 = file.size;
+          _progressBarActive1 = true;
         });
       }
     }
@@ -77,28 +81,21 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      // files = result.paths.map((path) => File(path));
-      // print('Result path : $files');
-      // uploadImage(result.paths);
       PlatformFile file = result.files.first;
       print('FileName : ${file.name}');
       print('FileSize : ${file.size}');
       print('FileExtension : ${file.extension}');
       print('FilePath : ${file.path}');
-      // setState(() {
-      //   filename2 = file.name;
-      //   file_size2 = file.size;
-      // });
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
-          filename2 = fileSize;
-          // file_size1 = '';
+          filename2 = fileSizeError;
         });
       } else {
         setState(() {
           filename2 = file.name;
           file_size2 = file.size;
+          _progressBarActive2 = true;
         });
       }
     }
@@ -111,28 +108,21 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      // files = result.paths.map((path) => File(path));
-      // print('Result path : $files');
-      // uploadImage(result.paths);
       PlatformFile file = result.files.first;
       print('FileName : ${file.name}');
       print('FileSize : ${file.size}');
       print('FileExtension : ${file.extension}');
       print('FilePath : ${file.path}');
-      // setState(() {
-      //   filename3 = file.name;
-      //   file_size3 = file.size;
-      // });
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
-          filename3 = fileSize;
-          // file_size1 = '';
+          filename3 = fileSizeError;
         });
       } else {
         setState(() {
           filename3 = file.name;
           file_size3 = file.size;
+          _progressBarActive3 = true;
         });
       }
     }
@@ -145,28 +135,21 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      // files = result.paths.map((path) => File(path));
-      // print('Result path : $files');
-      // uploadImage(result.paths);
       PlatformFile file = result.files.first;
       print('FileName : ${file.name}');
       print('FileSize : ${file.size}');
       print('FileExtension : ${file.extension}');
       print('FilePath : ${file.path}');
-      // setState(() {
-      //   filename4 = file.name;
-      //   file_size4 = file.size;
-      // });
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
-          filename4 = fileSize;
-          // file_size1 = '';
+          filename4 = fileSizeError;
         });
       } else {
         setState(() {
           filename4 = file.name;
           file_size4 = file.size;
+          _progressBarActive4 = true;
         });
       }
     }
@@ -175,45 +158,37 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   }
 
   chooseImage_5() async {
-    // setState(() async {
+    // setState(() {
     // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      // files = result.paths.map((path) => File(path));
-      // print('Result path : $files');
-      // uploadImage(result.paths);
+      File files = File(result.files.single.path);
+      print('This is main Files : $files');
       PlatformFile file = result.files.first;
-      print('FileName : ${file.name}');
-      print('FileSize : ${file.size}');
-      print('FileExtension : ${file.extension}');
-      print('FilePath : ${file.path}');
-      // setState(() {
-      //   filename5 = file.name;
-      //   file_size5 = file.size;
-      // });
+      // print('FileName : ${file.name}');
+      // print('FileSize : ${file.size}');
+      // print('FileExtension : ${file.extension}');
+      // print('FilePath : ${file.path}');
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
-          filename5 = fileSize;
-          // file_size1 = '';
+          filename5 = fileSizeError;
         });
       } else {
         setState(() {
           filename5 = file.name;
           file_size5 = file.size;
+          _progressBarActive5 = true;
         });
+        fileName = files.path.split('/').last;
+        print('This is fileName : ${files.path}');
+        // upload(fileName);
+        uploadImage(files.path);
       }
     }
     // });
     setStatus('');
   }
-
-  // clickImage() {
-  //   setState(() {
-  //     file = ImagePicker.pickImage(source: ImageSource.camera);
-  //   });
-  //   setStatus('');
-  // }
 
   setStatus(String message) {
     setState(() {
@@ -222,44 +197,64 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   }
 
   // startUpload() {
-  //   setStatus('Uploading Image...');
-  //   print("File Size lengthSync: ${tmpFile.lengthSync()}");
-  //   length = tmpFile.lengthSync();
-  //   length = length / 1024;
-  //   print('File Size in KB : $length');
+  // setStatus('Uploading Image...');
+  // print("File Size lengthSync: ${tmpFile.lengthSync()}");
+  // length = tmpFile.lengthSync();
+  // length = length / 1024;
+  // print('File Size in KB : $length');
 
-  //   if (null == tmpFile) {
-  //     setStatus(errMessage);
-  //     return;
-  //   }
-  //   if (length > 2000) {
-  //     setStatus(fileSize);
-  //     return;
-  //   }
+  // if (null == tmpFile) {
+  //   setStatus(errMessage);
+  //   return;
+  // }
+  // if (length > 2000) {
+  //   setStatus(fileSizeError);
+  //   return;
+  // }
   // String fileName = tmpFile.path.split('/').last;
-  //   upload(fileName);
-  //   // uploadFile();
+  // upload(fileName);
+  // uploadFile();
   // }
 
-  // upload(String fileName) {
-  //   http.post(uploadEndPoint, body: {
-  //     "image": base64Image,
-  //     "name": fileName,
-  //     // "action": "UPLOADIMAGE",
-  //   }).then((result) {
-  //     print("ImageBase64: $base64Image");
-  //     print("FileName: $fileName");
-  //     setStatus(result.statusCode == 200 ? result.body : errMessage);
-  //   }).catchError((error) {
-  //     setStatus(error);
-  //   });
-  // }
+  upload(String fileName) {
+    http.post(uploadEndPoint, body: {
+      "image": base64Image,
+      "name": fileName,
+    }).then((result) {
+      print("ImageBase64: $base64Image");
+      print("FileName: $fileName");
+      setStatus(result.statusCode == 200 ? result.body : errMessage);
+      if (result.statusCode == 200) {
+        print('This is result body ${result.body}');
+      } else {
+        print('This is ERROR MESSAGE');
+      }
+    }).catchError((error) {
+      // setStatus(error);
+      print(error);
+    });
+  }
 
   Future<String> uploadImage(filename) async {
+    print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
-    request.files.add(await http.MultipartFile.fromPath('picture', filename));
-    print('This Is Filename: $filename');
+
+    request.fields['filename'] = fileName;
+    request.fields['isuploadFile'] = 'yes';
+
+    request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
+    print('Print RES: $res');
+
+    var response = await http.Response.fromStream(res);
+    print('Response code: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      print('Result Fail:');
+      return null;
+    }
+    print('Result Pass: ${json.decode(response.body)}');
+    print('This is response: $response');
+    print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
@@ -304,140 +299,228 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                child: OutlineButton(
-                  onPressed: chooseImage_1,
-                  child: Text('Choose File 1'),
-                ),
-              ),
-              // SizedBox(
-              //   height: 8.0,
-              // ),
-              Expanded(
-                child: filename1 != null
-                    ? Text('$filename1')
-                    : SizedBox(
-                        height: 5.0,
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: OutlineButton(
+                        onPressed: () {},
+                        child: Text('Against Investigations'),
                       ),
-              ),
-              // OutlineButton(
-              //   onPressed: clickImage,
-              //   child: Text('Click Image'),
-              // ),
-              // SizedBox(
-              //   height: 5.0,
-              // ),
-              Expanded(
-                child: file_size1 != null
-                    ? Text('$file_size1 kB')
-                    : SizedBox(
-                        height: 5.0,
+                    ),
+                    Expanded(
+                      child: OutlineButton(
+                        onPressed: () {},
+                        child: Text('My Routine Reports'),
                       ),
-              ),
-              // showImage(),
-              SizedBox(
-                height: 5.0,
-              ),
-              Expanded(
-                child: OutlineButton(
-                  onPressed: chooseImage_2,
-                  child: Text('Choose File 2'),
-                ),
-              ),
-              Expanded(
-                child: filename2 != null
-                    ? Text('$filename2')
-                    : SizedBox(
-                        height: 5.0,
+                    ),
+                    Expanded(
+                      child: OutlineButton(
+                        onPressed: () {},
+                        child: Text('Lab/Hospital Upload'),
                       ),
-              ),
-              Expanded(
-                child: file_size2 != null
-                    ? Text('$file_size2 kB')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Expanded(
-                child: OutlineButton(
-                  onPressed: chooseImage_3,
-                  child: Text('Choose File 3'),
-                ),
-              ),
-              Expanded(
-                child: filename3 != null
-                    ? Text('$filename3')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              Expanded(
-                child: file_size3 != null
-                    ? Text('$file_size3 kB')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Expanded(
-                child: OutlineButton(
-                  onPressed: chooseImage_4,
-                  child: Text('Choose File 4'),
-                ),
-              ),
-              Expanded(
-                child: filename4 != null
-                    ? Text('$filename4')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              Expanded(
-                child: file_size4 != null
-                    ? Text('$file_size4 kB')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Expanded(
-                child: OutlineButton(
-                  onPressed: chooseImage_5,
-                  child: Text('Choose File 5'),
-                ),
-              ),
-              Expanded(
-                child: filename5 != null
-                    ? Text('$filename5')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              Expanded(
-                child: file_size5 != null
-                    ? Text('$file_size5 kB')
-                    : SizedBox(
-                        height: 5.0,
-                      ),
-              ),
-              Text(
-                status,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20.0,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
                 height: 20.0,
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    OutlineButton(
+                      onPressed: chooseImage_1,
+                      child: Text('Choose File 1'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            filename1 != null
+                                ? Text('$filename1')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                            file_size1 != null
+                                ? Text('$file_size1 kB')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        _progressBarActive1 == true
+                            ? CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            : Container(),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    OutlineButton(
+                      onPressed: chooseImage_2,
+                      child: Text('Choose File 2'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            filename2 != null
+                                ? Text('$filename2')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                            file_size2 != null
+                                ? Text('$file_size2 kB')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        _progressBarActive2 == true
+                            ? CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            : Container(),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    OutlineButton(
+                      onPressed: chooseImage_3,
+                      child: Text('Choose File 3'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            filename3 != null
+                                ? Text('$filename3')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                            file_size3 != null
+                                ? Text('$file_size3 kB')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        _progressBarActive3 == true
+                            ? CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            : Container(),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    OutlineButton(
+                      onPressed: chooseImage_4,
+                      child: Text('Choose File 4'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            filename4 != null
+                                ? Text('$filename4')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                            file_size4 != null
+                                ? Text('$file_size4 kB')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        _progressBarActive4 == true
+                            ? CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            : Container(),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    OutlineButton(
+                      onPressed: chooseImage_5,
+                      child: Text('Choose File 5'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            filename5 != null
+                                ? Text('$filename5')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                            file_size5 != null
+                                ? Text('$file_size5 kB')
+                                : SizedBox(
+                                    height: 5.0,
+                                  ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        _progressBarActive5 == true
+                            ? CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            : Container(),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ],
           ),
