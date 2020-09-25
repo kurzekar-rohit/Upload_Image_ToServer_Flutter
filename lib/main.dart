@@ -25,12 +25,17 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       'https://goodmove.cloud/flutter_android_medical/api_uploadimage.php';
   Future<File> file;
   String status = '';
+  String status1 = '';
+  String status2 = '';
+  String status3 = '';
+  String status4 = '';
+  String status5 = '';
   String base64Image;
   File tmpFile;
   String errMessage = 'Error Uploading Image';
   String fileSizeError = 'File size is greater than 5MB';
   // var length;
-  String fileName;
+  String fileName, fileName1, fileName2, fileName3, fileName4, fileName5;
   List<File> files;
   bool _progressBarActive1,
       _progressBarActive2,
@@ -50,15 +55,11 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       file_size5;
 
   chooseImage_1() async {
-    // setState(() async {
-    // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
+      File files = File(result.files.single.path);
+      print('This is main Files 1 : $files');
       PlatformFile file = result.files.first;
-      print('FileName : ${file.name}');
-      print('FileSize : ${file.size}');
-      print('FileExtension : ${file.extension}');
-      print('FilePath : ${file.path}');
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
@@ -70,22 +71,22 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           file_size1 = file.size;
           _progressBarActive1 = true;
         });
+        fileName1 = files.path.split('/').last;
+        print('This is fileName : ${files.path}');
+
+        uploadImage1(files.path);
       }
     }
-    // });
-    setStatus('');
+
+    setStatus1('');
   }
 
   chooseImage_2() async {
-    // setState(() async {
-    // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
+      File files = File(result.files.single.path);
+      print('This is main Files 2 : $files');
       PlatformFile file = result.files.first;
-      print('FileName : ${file.name}');
-      print('FileSize : ${file.size}');
-      print('FileExtension : ${file.extension}');
-      print('FilePath : ${file.path}');
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
@@ -97,22 +98,23 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           file_size2 = file.size;
           _progressBarActive2 = true;
         });
+        fileName2 = files.path.split('/').last;
+        print('This is fileName : ${files.path}');
+
+        uploadImage2(files.path);
       }
     }
-    // });
-    setStatus('');
+
+    setStatus2('');
   }
 
   chooseImage_3() async {
-    // setState(() async {
-    // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
+      File files = File(result.files.single.path);
+      print('This is main Files 3 : $files');
       PlatformFile file = result.files.first;
-      print('FileName : ${file.name}');
-      print('FileSize : ${file.size}');
-      print('FileExtension : ${file.extension}');
-      print('FilePath : ${file.path}');
+
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
@@ -124,22 +126,23 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           file_size3 = file.size;
           _progressBarActive3 = true;
         });
+        fileName3 = files.path.split('/').last;
+        print('This is fileName : ${files.path}');
+
+        uploadImage3(files.path);
       }
     }
-    // });
-    setStatus('');
+
+    setStatus3('');
   }
 
   chooseImage_4() async {
-    // setState(() async {
-    // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
+      File files = File(result.files.single.path);
+      print('This is main Files 4 : $files');
       PlatformFile file = result.files.first;
-      print('FileName : ${file.name}');
-      print('FileSize : ${file.size}');
-      print('FileExtension : ${file.extension}');
-      print('FilePath : ${file.path}');
+
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
@@ -151,24 +154,23 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           file_size4 = file.size;
           _progressBarActive4 = true;
         });
+        fileName4 = files.path.split('/').last;
+        print('This is fileName : ${files.path}');
+
+        uploadImage4(files.path);
       }
     }
-    // });
-    setStatus('');
+
+    setStatus4('');
   }
 
   chooseImage_5() async {
-    // setState(() {
-    // file = ImagePicker.pickImage(source: ImageSource.gallery);
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
       File files = File(result.files.single.path);
-      print('This is main Files : $files');
+      print('This is main Files 5 : $files');
       PlatformFile file = result.files.first;
-      // print('FileName : ${file.name}');
-      // print('FileSize : ${file.size}');
-      // print('FileExtension : ${file.extension}');
-      // print('FilePath : ${file.path}');
+
       if (file.size > 5120) {
         print('FIle size is more');
         setState(() {
@@ -180,19 +182,49 @@ class UploadImageDemoState extends State<UploadImageDemo> {
           file_size5 = file.size;
           _progressBarActive5 = true;
         });
-        fileName = files.path.split('/').last;
+        fileName5 = files.path.split('/').last;
         print('This is fileName : ${files.path}');
-        // upload(fileName);
-        uploadImage(files.path);
+
+        uploadImage5(files.path);
       }
     }
-    // });
-    setStatus('');
+
+    setStatus5('');
   }
 
   setStatus(String message) {
     setState(() {
       status = message;
+    });
+  }
+
+  setStatus1(String message) {
+    setState(() {
+      status1 = message;
+    });
+  }
+
+  setStatus2(String message) {
+    setState(() {
+      status2 = message;
+    });
+  }
+
+  setStatus3(String message) {
+    setState(() {
+      status3 = message;
+    });
+  }
+
+  setStatus4(String message) {
+    setState(() {
+      status4 = message;
+    });
+  }
+
+  setStatus5(String message) {
+    setState(() {
+      status5 = message;
     });
   }
 
@@ -235,26 +267,128 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     });
   }
 
-  Future<String> uploadImage(filename) async {
-    print('Print FILENAME: $filename');
+  Future<String> uploadImage1(filename) async {
+    // print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
 
-    request.fields['filename'] = fileName;
+    request.fields['filename'] = fileName1;
     request.fields['isuploadFile'] = 'yes';
 
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    print('Print RES: $res');
+    // print('Print RES: $res');
 
     var response = await http.Response.fromStream(res);
-    print('Response code: ${response.statusCode}');
+    print('Response code 1: ${response.statusCode}');
     if (response.statusCode != 200) {
-      print('Result Fail:');
+      print('Result Fail 1:');
       return null;
     }
-    print('Result Pass: ${json.decode(response.body)}');
-    print('This is response: $response');
-    print('This is response.body : ${response.body}');
+    setStatus1(response.statusCode == 200 ? response.body : errMessage);
+    print('Result Pass 1: ${json.decode(response.body)}');
+    _progressBarActive1 = false;
+    // print('This is response: $response');
+    // print('This is response.body : ${response.body}');
+    return res.reasonPhrase;
+  }
+
+  Future<String> uploadImage2(filename) async {
+    // print('Print FILENAME: $filename');
+    var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
+
+    request.fields['filename'] = fileName2;
+    request.fields['isuploadFile'] = 'yes';
+
+    request.files.add(await http.MultipartFile.fromPath('file', filename));
+    var res = await request.send();
+    // print('Print RES: $res');
+
+    var response = await http.Response.fromStream(res);
+    print('Response code 2: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      print('Result Fail 2:');
+      return null;
+    }
+    setStatus2(response.statusCode == 200 ? response.body : errMessage);
+    print('Result Pass 2: ${json.decode(response.body)}');
+    _progressBarActive2 = false;
+    // print('This is response: $response');
+    // print('This is response.body : ${response.body}');
+    return res.reasonPhrase;
+  }
+
+  Future<String> uploadImage3(filename) async {
+    // print('Print FILENAME: $filename');
+    var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
+
+    request.fields['filename'] = fileName3;
+    request.fields['isuploadFile'] = 'yes';
+
+    request.files.add(await http.MultipartFile.fromPath('file', filename));
+    var res = await request.send();
+    // print('Print RES: $res');
+
+    var response = await http.Response.fromStream(res);
+    print('Response code 3: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      print('Result Fail 3:');
+      return null;
+    }
+    setStatus3(response.statusCode == 200 ? response.body : errMessage);
+    print('Result Pass 3: ${json.decode(response.body)}');
+    _progressBarActive3 = false;
+    // print('This is response: $response');
+    // print('This is response.body : ${response.body}');
+    return res.reasonPhrase;
+  }
+
+  Future<String> uploadImage4(filename) async {
+    // print('Print FILENAME: $filename');
+    var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
+
+    request.fields['filename'] = fileName4;
+    request.fields['isuploadFile'] = 'yes';
+
+    request.files.add(await http.MultipartFile.fromPath('file', filename));
+    var res = await request.send();
+    // print('Print RES: $res');
+
+    var response = await http.Response.fromStream(res);
+    print('Response code 4: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      print('Result Fail 4:');
+      return null;
+    }
+    setStatus4(response.statusCode == 200 ? response.body : errMessage);
+    print('Result Pass 4: ${json.decode(response.body)}');
+    _progressBarActive4 = false;
+    // print('This is response: $response');
+    // print('This is response.body : ${response.body}');
+    return res.reasonPhrase;
+  }
+
+  Future<String> uploadImage5(filename) async {
+    // print('Print FILENAME: $filename');
+    var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
+
+    request.fields['filename'] = fileName5;
+    request.fields['isuploadFile'] = 'yes';
+
+    request.files.add(await http.MultipartFile.fromPath('file', filename));
+    var res = await request.send();
+    // print('Print RES: $res');
+
+    var response = await http.Response.fromStream(res);
+    print('Response code 5: ${response.statusCode}');
+    if (response.statusCode != 200) {
+      print('Result Fail 5:');
+      return null;
+    }
+    setStatus5(response.statusCode == 200 ? response.body : errMessage);
+    print('Result Pass 5: ${json.decode(response.body)}');
+    _progressBarActive5 = false;
+    // print('This is response: $response');
+    // print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
@@ -338,20 +472,30 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            filename1 != null
-                                ? Text('$filename1')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                            file_size1 != null
-                                ? Text('$file_size1 kB')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              filename1 != null
+                                  ? Text('$filename1')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              file_size1 != null
+                                  ? Text('$file_size1 kB')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              Text(
+                                status1,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5.0,
@@ -377,20 +521,30 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            filename2 != null
-                                ? Text('$filename2')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                            file_size2 != null
-                                ? Text('$file_size2 kB')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              filename2 != null
+                                  ? Text('$filename2')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              file_size2 != null
+                                  ? Text('$file_size2 kB')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              Text(
+                                status2,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5.0,
@@ -416,20 +570,30 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            filename3 != null
-                                ? Text('$filename3')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                            file_size3 != null
-                                ? Text('$file_size3 kB')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              filename3 != null
+                                  ? Text('$filename3')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              file_size3 != null
+                                  ? Text('$file_size3 kB')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              Text(
+                                status3,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5.0,
@@ -455,20 +619,30 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            filename4 != null
-                                ? Text('$filename4')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                            file_size4 != null
-                                ? Text('$file_size4 kB')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              filename4 != null
+                                  ? Text('$filename4')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              file_size4 != null
+                                  ? Text('$file_size4 kB')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              Text(
+                                status4,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5.0,
@@ -494,20 +668,30 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            filename5 != null
-                                ? Text('$filename5')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                            file_size5 != null
-                                ? Text('$file_size5 kB')
-                                : SizedBox(
-                                    height: 5.0,
-                                  ),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              filename5 != null
+                                  ? Text('$filename5')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              file_size5 != null
+                                  ? Text('$file_size5 kB')
+                                  : SizedBox(
+                                      height: 5.0,
+                                    ),
+                              Text(
+                                status5,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 5.0,
