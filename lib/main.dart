@@ -53,11 +53,11 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       file_size4,
       filename5,
       file_size5;
-
+  File files1, files2, files3, files4, files5;
   chooseImage_1() async {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      File files = File(result.files.single.path);
+      files1 = File(result.files.single.path);
       print('This is main Files 1 : $files');
       PlatformFile file = result.files.first;
       if (file.size > 5120) {
@@ -69,12 +69,12 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         setState(() {
           filename1 = file.name;
           file_size1 = file.size;
-          _progressBarActive1 = true;
+          // _progressBarActive1 = true;
         });
-        fileName1 = files.path.split('/').last;
-        print('This is fileName : ${files.path}');
+        // fileName1 = files1.path.split('/').last;
+        // print('This is fileName : ${files1.path}');
 
-        uploadImage1(files.path);
+        // uploadImage1(files1.path);
       }
     }
 
@@ -84,7 +84,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   chooseImage_2() async {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      File files = File(result.files.single.path);
+      files2 = File(result.files.single.path);
       print('This is main Files 2 : $files');
       PlatformFile file = result.files.first;
       if (file.size > 5120) {
@@ -96,12 +96,12 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         setState(() {
           filename2 = file.name;
           file_size2 = file.size;
-          _progressBarActive2 = true;
+          // _progressBarActive2 = true;
         });
-        fileName2 = files.path.split('/').last;
-        print('This is fileName : ${files.path}');
+        // fileName2 = files2.path.split('/').last;
+        // print('This is fileName : ${files2.path}');
 
-        uploadImage2(files.path);
+        // uploadImage2(files2.path);
       }
     }
 
@@ -111,7 +111,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   chooseImage_3() async {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      File files = File(result.files.single.path);
+      files3 = File(result.files.single.path);
       print('This is main Files 3 : $files');
       PlatformFile file = result.files.first;
 
@@ -124,12 +124,12 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         setState(() {
           filename3 = file.name;
           file_size3 = file.size;
-          _progressBarActive3 = true;
+          // _progressBarActive3 = true;
         });
-        fileName3 = files.path.split('/').last;
-        print('This is fileName : ${files.path}');
+        // fileName3 = files4.path.split('/').last;
+        // print('This is fileName : ${files4.path}');
 
-        uploadImage3(files.path);
+        // uploadImage3(files4.path);
       }
     }
 
@@ -139,7 +139,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   chooseImage_4() async {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      File files = File(result.files.single.path);
+      files4 = File(result.files.single.path);
       print('This is main Files 4 : $files');
       PlatformFile file = result.files.first;
 
@@ -152,12 +152,12 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         setState(() {
           filename4 = file.name;
           file_size4 = file.size;
-          _progressBarActive4 = true;
+          // _progressBarActive4 = true;
         });
-        fileName4 = files.path.split('/').last;
-        print('This is fileName : ${files.path}');
+        // fileName4 = files4.path.split('/').last;
+        // print('This is fileName : ${files4.path}');
 
-        uploadImage4(files.path);
+        // uploadImage4(files4.path);
       }
     }
 
@@ -167,7 +167,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   chooseImage_5() async {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      File files = File(result.files.single.path);
+      files5 = File(result.files.single.path);
       print('This is main Files 5 : $files');
       PlatformFile file = result.files.first;
 
@@ -180,12 +180,12 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         setState(() {
           filename5 = file.name;
           file_size5 = file.size;
-          _progressBarActive5 = true;
+          // _progressBarActive5 = true;
         });
-        fileName5 = files.path.split('/').last;
-        print('This is fileName : ${files.path}');
+        // fileName5 = files5.path.split('/').last;
+        // print('This is fileName : ${files5.path}');
 
-        uploadImage5(files.path);
+        // uploadImage5(files5.path);
       }
     }
 
@@ -247,6 +247,60 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   // upload(fileName);
   // uploadFile();
   // }
+  startUpload_1() {
+    setState(() {
+      _progressBarActive1 = true;
+    });
+
+    fileName1 = files1.path.split('/').last;
+    print('This is fileName 1: ${files1.path}');
+
+    uploadImage1(files1.path);
+  }
+
+  startUpload_2() {
+    setState(() {
+      _progressBarActive2 = true;
+    });
+
+    fileName2 = files2.path.split('/').last;
+    print('This is fileName 2: ${files2.path}');
+
+    uploadImage2(files2.path);
+  }
+
+  startUpload_3() {
+    setState(() {
+      _progressBarActive3 = true;
+    });
+
+    fileName3 = files3.path.split('/').last;
+    print('This is fileName 3: ${files3.path}');
+
+    uploadImage3(files3.path);
+  }
+
+  startUpload_4() {
+    setState(() {
+      _progressBarActive4 = true;
+    });
+
+    fileName4 = files4.path.split('/').last;
+    print('This is fileName 4: ${files4.path}');
+
+    uploadImage4(files4.path);
+  }
+
+  startUpload_5() {
+    setState(() {
+      _progressBarActive5 = true;
+    });
+
+    fileName5 = files5.path.split('/').last;
+    print('This is fileName 5: ${files5.path}');
+
+    uploadImage5(files5.path);
+  }
 
   upload(String fileName) {
     http.post(uploadEndPoint, body: {
@@ -268,16 +322,11 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   }
 
   Future<String> uploadImage1(filename) async {
-    // print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
-
     request.fields['filename'] = fileName1;
     request.fields['isuploadFile'] = 'yes';
-
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    // print('Print RES: $res');
-
     var response = await http.Response.fromStream(res);
     print('Response code 1: ${response.statusCode}');
     if (response.statusCode != 200) {
@@ -287,22 +336,15 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus1(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 1: ${json.decode(response.body)}');
     _progressBarActive1 = false;
-    // print('This is response: $response');
-    // print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
   Future<String> uploadImage2(filename) async {
-    // print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
-
     request.fields['filename'] = fileName2;
     request.fields['isuploadFile'] = 'yes';
-
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    // print('Print RES: $res');
-
     var response = await http.Response.fromStream(res);
     print('Response code 2: ${response.statusCode}');
     if (response.statusCode != 200) {
@@ -312,22 +354,15 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus2(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 2: ${json.decode(response.body)}');
     _progressBarActive2 = false;
-    // print('This is response: $response');
-    // print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
   Future<String> uploadImage3(filename) async {
-    // print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
-
     request.fields['filename'] = fileName3;
     request.fields['isuploadFile'] = 'yes';
-
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    // print('Print RES: $res');
-
     var response = await http.Response.fromStream(res);
     print('Response code 3: ${response.statusCode}');
     if (response.statusCode != 200) {
@@ -337,22 +372,15 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus3(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 3: ${json.decode(response.body)}');
     _progressBarActive3 = false;
-    // print('This is response: $response');
-    // print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
   Future<String> uploadImage4(filename) async {
-    // print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
-
     request.fields['filename'] = fileName4;
     request.fields['isuploadFile'] = 'yes';
-
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    // print('Print RES: $res');
-
     var response = await http.Response.fromStream(res);
     print('Response code 4: ${response.statusCode}');
     if (response.statusCode != 200) {
@@ -362,22 +390,16 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus4(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 4: ${json.decode(response.body)}');
     _progressBarActive4 = false;
-    // print('This is response: $response');
-    // print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
   Future<String> uploadImage5(filename) async {
     // print('Print FILENAME: $filename');
     var request = http.MultipartRequest('POST', Uri.parse(uploadEndPoint));
-
     request.fields['filename'] = fileName5;
     request.fields['isuploadFile'] = 'yes';
-
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    // print('Print RES: $res');
-
     var response = await http.Response.fromStream(res);
     print('Response code 5: ${response.statusCode}');
     if (response.statusCode != 200) {
@@ -387,8 +409,6 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus5(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 5: ${json.decode(response.body)}');
     _progressBarActive5 = false;
-    // print('This is response: $response');
-    // print('This is response.body : ${response.body}');
     return res.reasonPhrase;
   }
 
@@ -428,7 +448,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         appBar: AppBar(
           title: Text("Upload Image Demo"),
         ),
-        body: Container(
+        body: SingleChildScrollView(
           padding: EdgeInsets.all(30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -498,13 +518,26 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                           ),
                         ),
                         SizedBox(
-                          width: 5.0,
+                          width: 4.0,
                         ),
                         _progressBarActive1 == true
                             ? CircularProgressIndicator(
                                 strokeWidth: 2,
                               )
                             : Container(),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        ButtonTheme(
+                          minWidth: 10.0,
+                          height: 30.0,
+                          child: RaisedButton(
+                            onPressed: startUpload_1,
+                            textColor: Colors.white,
+                            color: Colors.green,
+                            child: Text('Upload'),
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -554,6 +587,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        ButtonTheme(
+                          minWidth: 10.0,
+                          height: 30.0,
+                          child: RaisedButton(
+                            onPressed: startUpload_2,
+                            textColor: Colors.white,
+                            color: Colors.green,
+                            child: Text('Upload'),
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -603,6 +649,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        ButtonTheme(
+                          minWidth: 10.0,
+                          height: 30.0,
+                          child: RaisedButton(
+                            onPressed: startUpload_3,
+                            textColor: Colors.white,
+                            color: Colors.green,
+                            child: Text('Upload'),
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -652,6 +711,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        ButtonTheme(
+                          minWidth: 10.0,
+                          height: 30.0,
+                          child: RaisedButton(
+                            onPressed: startUpload_4,
+                            textColor: Colors.white,
+                            color: Colors.green,
+                            child: Text('Upload'),
+                          ),
+                        ),
                       ],
                     )
                   ],
@@ -701,6 +773,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        ButtonTheme(
+                          minWidth: 10.0,
+                          height: 30.0,
+                          child: RaisedButton(
+                            onPressed: startUpload_5,
+                            textColor: Colors.white,
+                            color: Colors.green,
+                            child: Text('Upload'),
+                          ),
+                        ),
                       ],
                     )
                   ],
