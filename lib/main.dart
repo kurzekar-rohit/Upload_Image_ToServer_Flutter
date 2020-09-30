@@ -55,7 +55,10 @@ class UploadImageDemoState extends State<UploadImageDemo> {
       file_size5;
   File files1, files2, files3, files4, files5;
   chooseImage_1() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles();
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        // type: FileType.custom,
+        // allowedExtensions: ['jpg', 'pdf', 'doc', 'mpeg'],
+        );
     if (result != null) {
       files1 = File(result.files.single.path);
       print('This is main Files 1 : $files');
@@ -76,6 +79,8 @@ class UploadImageDemoState extends State<UploadImageDemo> {
 
         // uploadImage1(files1.path);
       }
+    } else {
+      print('This is error 1: $errMessage');
     }
 
     setStatus1('');
@@ -103,6 +108,8 @@ class UploadImageDemoState extends State<UploadImageDemo> {
 
         // uploadImage2(files2.path);
       }
+    } else {
+      print('This is error 2: $errMessage');
     }
 
     setStatus2('');
@@ -131,6 +138,8 @@ class UploadImageDemoState extends State<UploadImageDemo> {
 
         // uploadImage3(files4.path);
       }
+    } else {
+      print('This is error 3: $errMessage');
     }
 
     setStatus3('');
@@ -159,6 +168,8 @@ class UploadImageDemoState extends State<UploadImageDemo> {
 
         // uploadImage4(files4.path);
       }
+    } else {
+      print('This is error 4: $errMessage');
     }
 
     setStatus4('');
@@ -187,6 +198,8 @@ class UploadImageDemoState extends State<UploadImageDemo> {
 
         // uploadImage5(files5.path);
       }
+    } else {
+      print('This is error 5: $errMessage');
     }
 
     setStatus5('');
@@ -247,15 +260,52 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   // upload(fileName);
   // uploadFile();
   // }
-  startUpload_1() {
-    setState(() {
-      _progressBarActive1 = true;
-    });
+  startUpload_1() async {
+    // setState(() {
+    //   _progressBarActive1 = true;
+    // });
+    if (files1 != null) {
+      setState(() {
+        _progressBarActive1 = true;
+      });
+      fileName1 = files1.path.split('/').last;
+      print('This is fileName 1: ${files1.path}');
+      await uploadImage1(files1.path);
+    }
 
-    fileName1 = files1.path.split('/').last;
-    print('This is fileName 1: ${files1.path}');
+    if (files2 != null) {
+      setState(() {
+        _progressBarActive2 = true;
+      });
+      fileName2 = files2.path.split('/').last;
+      print('This is fileName 2: ${files2.path}');
+      await uploadImage2(files2.path);
+    }
 
-    uploadImage1(files1.path);
+    if (files3 != null) {
+      setState(() {
+        _progressBarActive3 = true;
+      });
+      fileName3 = files3.path.split('/').last;
+      print('This is fileName 3: ${files3.path}');
+      await uploadImage3(files3.path);
+    }
+    if (files4 != null) {
+      setState(() {
+        _progressBarActive4 = true;
+      });
+      fileName4 = files4.path.split('/').last;
+      print('This is fileName 4: ${files4.path}');
+      await uploadImage4(files4.path);
+    }
+    if (files5 != null) {
+      setState(() {
+        _progressBarActive5 = true;
+      });
+      fileName5 = files5.path.split('/').last;
+      print('This is fileName 5: ${files5.path}');
+      await uploadImage5(files5.path);
+    }
   }
 
   startUpload_2() {
@@ -265,7 +315,6 @@ class UploadImageDemoState extends State<UploadImageDemo> {
 
     fileName2 = files2.path.split('/').last;
     print('This is fileName 2: ${files2.path}');
-
     uploadImage2(files2.path);
   }
 
@@ -525,19 +574,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
-                        SizedBox(
-                          width: 4.0,
-                        ),
-                        ButtonTheme(
-                          minWidth: 10.0,
-                          height: 30.0,
-                          child: RaisedButton(
-                            onPressed: startUpload_1,
-                            textColor: Colors.white,
-                            color: Colors.green,
-                            child: Text('Upload'),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 4.0,
+                        // ),
+                        // ButtonTheme(
+                        //   minWidth: 10.0,
+                        //   height: 30.0,
+                        //   child: RaisedButton(
+                        //     onPressed: startUpload_1,
+                        //     textColor: Colors.white,
+                        //     color: Colors.green,
+                        //     child: Text('Upload'),
+                        //   ),
+                        // ),
                       ],
                     )
                   ],
@@ -587,19 +636,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
-                        SizedBox(
-                          width: 4.0,
-                        ),
-                        ButtonTheme(
-                          minWidth: 10.0,
-                          height: 30.0,
-                          child: RaisedButton(
-                            onPressed: startUpload_2,
-                            textColor: Colors.white,
-                            color: Colors.green,
-                            child: Text('Upload'),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 4.0,
+                        // ),
+                        // ButtonTheme(
+                        //   minWidth: 10.0,
+                        //   height: 30.0,
+                        //   child: RaisedButton(
+                        //     onPressed: startUpload_2,
+                        //     textColor: Colors.white,
+                        //     color: Colors.green,
+                        //     child: Text('Upload'),
+                        //   ),
+                        // ),
                       ],
                     )
                   ],
@@ -649,19 +698,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
-                        SizedBox(
-                          width: 4.0,
-                        ),
-                        ButtonTheme(
-                          minWidth: 10.0,
-                          height: 30.0,
-                          child: RaisedButton(
-                            onPressed: startUpload_3,
-                            textColor: Colors.white,
-                            color: Colors.green,
-                            child: Text('Upload'),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 4.0,
+                        // ),
+                        // ButtonTheme(
+                        //   minWidth: 10.0,
+                        //   height: 30.0,
+                        //   child: RaisedButton(
+                        //     onPressed: startUpload_3,
+                        //     textColor: Colors.white,
+                        //     color: Colors.green,
+                        //     child: Text('Upload'),
+                        //   ),
+                        // ),
                       ],
                     )
                   ],
@@ -711,19 +760,19 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
-                        SizedBox(
-                          width: 4.0,
-                        ),
-                        ButtonTheme(
-                          minWidth: 10.0,
-                          height: 30.0,
-                          child: RaisedButton(
-                            onPressed: startUpload_4,
-                            textColor: Colors.white,
-                            color: Colors.green,
-                            child: Text('Upload'),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 4.0,
+                        // ),
+                        // ButtonTheme(
+                        //   minWidth: 10.0,
+                        //   height: 30.0,
+                        //   child: RaisedButton(
+                        //     onPressed: startUpload_4,
+                        //     textColor: Colors.white,
+                        //     color: Colors.green,
+                        //     child: Text('Upload'),
+                        //   ),
+                        // ),
                       ],
                     )
                   ],
@@ -773,21 +822,34 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                                 strokeWidth: 2,
                               )
                             : Container(),
-                        SizedBox(
-                          width: 4.0,
-                        ),
-                        ButtonTheme(
-                          minWidth: 10.0,
-                          height: 30.0,
-                          child: RaisedButton(
-                            onPressed: startUpload_5,
-                            textColor: Colors.white,
-                            color: Colors.green,
-                            child: Text('Upload'),
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 4.0,
+                        // ),
+                        // ButtonTheme(
+                        //   minWidth: 10.0,
+                        //   height: 30.0,
+                        //   child: RaisedButton(
+                        //     onPressed: startUpload_5,
+                        //     textColor: Colors.white,
+                        //     color: Colors.green,
+                        //     child: Text('Upload'),
+                        //   ),
+                        // ),
                       ],
-                    )
+                    ),
+                    SizedBox(
+                      width: 4.0,
+                    ),
+                    ButtonTheme(
+                      minWidth: 10.0,
+                      height: 30.0,
+                      child: RaisedButton(
+                        onPressed: startUpload_1,
+                        textColor: Colors.white,
+                        color: Colors.green,
+                        child: Text('Upload'),
+                      ),
+                    ),
                   ],
                 ),
               ),
