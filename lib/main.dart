@@ -36,6 +36,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
   String fileSizeError = 'File size is greater than 5MB';
   // var length;
   String fileName, fileName1, fileName2, fileName3, fileName4, fileName5;
+  var cross1, cross2, cross3, cross4, cross5 = false;
   List<File> files;
   bool _progressBarActive1,
       _progressBarActive2,
@@ -61,6 +62,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
         );
     if (result != null) {
       files1 = File(result.files.single.path);
+      cross1 = true;
       print('This is main Files 1 : $files');
       PlatformFile file = result.files.first;
       if (file.size > 5120) {
@@ -90,6 +92,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
       files2 = File(result.files.single.path);
+      cross2 = true;
       print('This is main Files 2 : $files');
       PlatformFile file = result.files.first;
       if (file.size > 5120) {
@@ -119,6 +122,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
       files3 = File(result.files.single.path);
+      cross3 = true;
       print('This is main Files 3 : $files');
       PlatformFile file = result.files.first;
 
@@ -149,6 +153,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
       files4 = File(result.files.single.path);
+      cross4 = true;
       print('This is main Files 4 : $files');
       PlatformFile file = result.files.first;
 
@@ -179,6 +184,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     FilePickerResult result = await FilePicker.platform.pickFiles();
     if (result != null) {
       files5 = File(result.files.single.path);
+      cross5 = true;
       print('This is main Files 5 : $files');
       PlatformFile file = result.files.first;
 
@@ -308,48 +314,48 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     }
   }
 
-  startUpload_2() {
-    setState(() {
-      _progressBarActive2 = true;
-    });
+  // startUpload_2() {
+  //   setState(() {
+  //     _progressBarActive2 = true;
+  //   });
 
-    fileName2 = files2.path.split('/').last;
-    print('This is fileName 2: ${files2.path}');
-    uploadImage2(files2.path);
-  }
+  //   fileName2 = files2.path.split('/').last;
+  //   print('This is fileName 2: ${files2.path}');
+  //   uploadImage2(files2.path);
+  // }
 
-  startUpload_3() {
-    setState(() {
-      _progressBarActive3 = true;
-    });
+  // startUpload_3() {
+  //   setState(() {
+  //     _progressBarActive3 = true;
+  //   });
 
-    fileName3 = files3.path.split('/').last;
-    print('This is fileName 3: ${files3.path}');
+  //   fileName3 = files3.path.split('/').last;
+  //   print('This is fileName 3: ${files3.path}');
 
-    uploadImage3(files3.path);
-  }
+  //   uploadImage3(files3.path);
+  // }
 
-  startUpload_4() {
-    setState(() {
-      _progressBarActive4 = true;
-    });
+  // startUpload_4() {
+  //   setState(() {
+  //     _progressBarActive4 = true;
+  //   });
 
-    fileName4 = files4.path.split('/').last;
-    print('This is fileName 4: ${files4.path}');
+  //   fileName4 = files4.path.split('/').last;
+  //   print('This is fileName 4: ${files4.path}');
 
-    uploadImage4(files4.path);
-  }
+  //   uploadImage4(files4.path);
+  // }
 
-  startUpload_5() {
-    setState(() {
-      _progressBarActive5 = true;
-    });
+  // startUpload_5() {
+  //   setState(() {
+  //     _progressBarActive5 = true;
+  //   });
 
-    fileName5 = files5.path.split('/').last;
-    print('This is fileName 5: ${files5.path}');
+  //   fileName5 = files5.path.split('/').last;
+  //   print('This is fileName 5: ${files5.path}');
 
-    uploadImage5(files5.path);
-  }
+  //   uploadImage5(files5.path);
+  // }
 
   upload(String fileName) {
     http.post(uploadEndPoint, body: {
@@ -385,6 +391,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus1(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 1: ${json.decode(response.body)}');
     _progressBarActive1 = false;
+    cross1 = false;
     return res.reasonPhrase;
   }
 
@@ -403,6 +410,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus2(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 2: ${json.decode(response.body)}');
     _progressBarActive2 = false;
+    cross2 = false;
     return res.reasonPhrase;
   }
 
@@ -421,6 +429,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus3(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 3: ${json.decode(response.body)}');
     _progressBarActive3 = false;
+    cross3 = false;
     return res.reasonPhrase;
   }
 
@@ -439,6 +448,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus4(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 4: ${json.decode(response.body)}');
     _progressBarActive4 = false;
+    cross4 = false;
     return res.reasonPhrase;
   }
 
@@ -458,6 +468,7 @@ class UploadImageDemoState extends State<UploadImageDemo> {
     setStatus5(response.statusCode == 200 ? response.body : errMessage);
     print('Result Pass 5: ${json.decode(response.body)}');
     _progressBarActive5 = false;
+    cross5 = false;
     return res.reasonPhrase;
   }
 
@@ -569,6 +580,18 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                         SizedBox(
                           width: 4.0,
                         ),
+                        cross1 == true
+                            ? IconButton(
+                                icon: Icon(Icons.cancel),
+                                onPressed: () {
+                                  setState(() {
+                                    filename1 = null;
+                                    file_size1 = null;
+                                    files1 = null;
+                                  });
+                                },
+                              )
+                            : Container(),
                         _progressBarActive1 == true
                             ? CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -631,6 +654,18 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                         SizedBox(
                           width: 5.0,
                         ),
+                        cross2 == true
+                            ? IconButton(
+                                icon: Icon(Icons.cancel),
+                                onPressed: () {
+                                  setState(() {
+                                    filename2 = null;
+                                    file_size2 = null;
+                                    files2 = null;
+                                  });
+                                },
+                              )
+                            : Container(),
                         _progressBarActive2 == true
                             ? CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -693,6 +728,18 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                         SizedBox(
                           width: 5.0,
                         ),
+                        cross3 == true
+                            ? IconButton(
+                                icon: Icon(Icons.cancel),
+                                onPressed: () {
+                                  setState(() {
+                                    filename3 = null;
+                                    file_size3 = null;
+                                    files3 = null;
+                                  });
+                                },
+                              )
+                            : Container(),
                         _progressBarActive3 == true
                             ? CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -755,6 +802,18 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                         SizedBox(
                           width: 5.0,
                         ),
+                        cross4 == true
+                            ? IconButton(
+                                icon: Icon(Icons.cancel),
+                                onPressed: () {
+                                  setState(() {
+                                    filename4 = null;
+                                    file_size4 = null;
+                                    files4 = null;
+                                  });
+                                },
+                              )
+                            : Container(),
                         _progressBarActive4 == true
                             ? CircularProgressIndicator(
                                 strokeWidth: 2,
@@ -817,6 +876,18 @@ class UploadImageDemoState extends State<UploadImageDemo> {
                         SizedBox(
                           width: 5.0,
                         ),
+                        cross5 == true
+                            ? IconButton(
+                                icon: Icon(Icons.cancel),
+                                onPressed: () {
+                                  setState(() {
+                                    filename5 = null;
+                                    file_size5 = null;
+                                    files5 = null;
+                                  });
+                                },
+                              )
+                            : Container(),
                         _progressBarActive5 == true
                             ? CircularProgressIndicator(
                                 strokeWidth: 2,
